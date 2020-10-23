@@ -1,28 +1,31 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <main>
+    <h1>Earthquakes</h1>
+    <earthquakes-list :earthquakes='earthquakes'></earthquakes-list>
+  </main>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import EarthquakesList from './components/EarthquakesList.vue';
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  name: 'app',
+data() {
+  return {
+    earthquakes: []
   }
+},
+mounted() {
+  fetch("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_day.geojson").then(response => response.json())
+  .then(earthquakeData => this.earthquakes = earthquakeData.features);
+},
+components: {
+  "earthquakes-list": EarthquakesList
+}
+
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>

@@ -1,4 +1,4 @@
-# iceland_earthquakes
+# earthquakes
 
 ## Project setup
 ```
