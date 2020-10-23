@@ -12,8 +12,6 @@
     </thead>
     <tbody>
         <tr v-for="(earthquake, index) in earthquakes" :earthquake="earthquake" :key="index">
-            <td v-on:click="handleClick">{{ earthquake.properties.place }}</td>
-            <td>{{ earthquake.properties.mag }}</td>
         </tr>
     </tbody>
 </table>
@@ -23,14 +21,13 @@
 
 <script>
 import { eventBus } from '../main.js';
+import EarthquakeItem from './EarthquakeItem.vue';
 
 export default {
     name: 'earthquakes-list',
     props: ['earthquakes'],
-    methods: {
-        handleClick(){
-            eventBus.$emit('earthquake-selected', this.earthquake);
-        }
+    components: {
+        "table-row": EarthquakeItem
     }
 }
 </script>
