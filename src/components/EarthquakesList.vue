@@ -11,8 +11,8 @@
     </tr>
     </thead>
     <tbody>
-        <tr v-for="(earthquake, index) in earthquakes" :earthquake="earthquake" :key="index">
-        </tr>
+        <table-row v-for="(earthquake, index) in earthquakes" :earthquake="earthquake" :key="index">
+        </table-row>
     </tbody>
 </table>
 </div>
