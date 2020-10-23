@@ -22,11 +22,16 @@ export default {
 data() {
   return {
     earthquakes: [],
-    selectedEarthquake: null
+    selectedEarthquake: null,
+    mags: [],
+    lons: [],
+    lats: []
   }
 },
 mounted() {
   this.fetchData();
+
+  this.extractMagnitudes();
 
   eventBus.$on('earthquake-selected', (earthquake) => {
     this.selectedEarthquake = earthquake
@@ -38,6 +43,8 @@ mounted() {
   const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
   const tiles = L.tileLayer(tileUrl, {attribution});
   tiles.addTo(myMap);
+
+  const myLayer = L.geoJSON().addTo(myMap);
 },
 components: {
   "earthquakes-list": EarthquakesList,
@@ -47,6 +54,12 @@ methods: {
   fetchData: function () {
     fetch("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_day.geojson").then(response => response.json())
   .then(earthquakeData => this.earthquakes = earthquakeData.features);
+  },
+  extractMagnitudes: function () {
+    for (const earthquake in this.earthquakes) {
+      const mag = this.earthquakes.properties.mag
+      this.mags.push(mag)
+    }
   }
 }
 
