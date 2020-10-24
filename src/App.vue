@@ -1,8 +1,12 @@
 <template>
 <main>
   <article>
-    <h1>Earthquakes</h1>
-    <div id="eq-map"></div>
+    <hgroup>
+    <h1>Earthquakes: data from US Geological Survey</h1>
+    <h2>Magnitude 2.5+ earthquakes for the past day</h2>
+    <h3>Click on a circle for more details</h3>
+    </hgroup>
+    <div class="center" id="eq-map"></div>
   </article>   
 </main>
 </template>
@@ -60,8 +64,8 @@ fetchData: async function () {
             color = '#fff';
             radius = 2;
           } else {
-            color = '#6a2';
-            radius = 3 * Math.max(mag, 1);
+            color = '#00846b';
+            radius = 4 * Math.max(mag, 1);
           }
 
           return L.circleMarker(latlng, {
@@ -85,4 +89,22 @@ fetchData: async function () {
   width: 80vw;
 }
 
+.center {
+  margin:auto;
+  padding: 10px;
+}
+
+hgroup {
+  text-align: center;
+  font-family: 'Krona One', sans-serif;
+}
+
+h2 {
+  font-style: italic;
+  color: #2F4F4F;
+}
+
+h3 {
+  color: #808080;
+}
 </style>
