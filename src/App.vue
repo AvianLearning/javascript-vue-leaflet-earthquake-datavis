@@ -1,11 +1,11 @@
 <template>
 <main>
+  <h1 class="center">Earthquakes: US Geological Survey data</h1>
+  <header class="image">
+    <h2 class="center">Magnitude 2.5+ earthquakes for the past day</h2>
+  </header>
   <article>
-    <hgroup>
-    <h1>Earthquakes: data from US Geological Survey</h1>
-    <h2>Magnitude 2.5+ earthquakes for the past day</h2>
-    <h3>Click on a circle for more details</h3>
-    </hgroup>
+    <h3 class="center">Click on a circle for more details</h3>
     <div class="center" id="eq-map"></div>
   </article>   
 </main>
@@ -65,7 +65,7 @@ fetchData: async function () {
             radius = 2;
           } else {
             color = '#00846b';
-            radius = 4 * Math.max(mag, 1);
+            radius = 6 * Math.max(mag, 1);
           }
 
           return L.circleMarker(latlng, {
@@ -89,22 +89,49 @@ fetchData: async function () {
   width: 80vw;
 }
 
+body {
+  font-family: 'Krona One', sans-serif;
+  background-color: #2F4F4F;
+}
+
 .center {
   margin:auto;
   padding: 10px;
 }
 
-hgroup {
-  text-align: center;
-  font-family: 'Krona One', sans-serif;
+.image {
+  background-image: url('./assets/seismometer.jpg');
+  background-position: center;
+  width: 100vw;
+  height: auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
+hgroup {
+  text-align: center;
+  margin: 20px;
+  
+}
+
+h1 {
+  color:white;
+  text-align: center;
+  text-shadow: 2px 2px 0 #7A7A7A;
+}
 h2 {
   font-style: italic;
-  color: #2F4F4F;
+  color: white;
+  text-align: center;
+  text-shadow: 4px 3px 0 #2F4F4F;
+  width: 50vw;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 20px;
 }
 
 h3 {
-  color: #808080;
+  color: #C4C4C4;
+  width: 50vw;
+  text-align: center;
 }
 </style>
