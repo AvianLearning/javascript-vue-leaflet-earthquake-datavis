@@ -12,7 +12,6 @@
 </template>
 
 <script>
-// import { eventBus } from './main.js';
 import "leaflet/dist/leaflet.css";
 import L from 'leaflet';
 
@@ -50,27 +49,20 @@ fetchData: async function () {
 
     L.geoJson(this.earthquakes, {
         onEachFeature: function (earthquake, layer) {
-          var props = earthquake.properties;
+          const props = earthquake.properties;
 
           layer.bindPopup('<a href="' + props.url + '">' + props.title + '</a>');
         },
         pointToLayer: function (earthquake, latlng) {
-          var color,
+          let color,
               mag,
               radius;
 
           mag = earthquake.properties.mag;
-          if (mag === null) {
-            color = '#fff';
-            radius = 2;
-          } else {
-            color = '#00846b';
-            radius = 6 * Math.max(mag, 1);
-          }
 
           return L.circleMarker(latlng, {
-            color: color,
-            radius: radius
+            color: '#00846b',
+            radius: 6 * mag
           });
         }
       }).addTo(this.myMap);
